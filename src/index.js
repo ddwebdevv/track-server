@@ -1,8 +1,13 @@
+require('./models/User');
 const express = require('express');
 const mongoose = require('mongoose');
+const authRoutes = require('./routes/authRoutes');
 const passDb = require('../password'); //password for database
 
 const app = express();
+
+app.use(express.json());
+app.use(authRoutes);
 
 //connecting string to our DB
 const mongoUri = `mongodb+srv://admin:${passDb.pass}@cluster0.3omm1.mongodb.net/<dbname>?retryWrites=true&w=majority`;
