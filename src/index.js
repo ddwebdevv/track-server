@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 const trackRoutes = require('./routes/trackRoutes');
 const requireAuth = require('./middlewares/requireAuth');
-const passDb = require('../password'); //password for database
+//const passDb = require('../password'); //password for database
+const passDb = process.env.PASSDB;
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use(authRoutes);
 app.use(trackRoutes);
 
 //connecting string to our DB
-const mongoUri = `mongodb+srv://admin:${passDb.pass}@cluster0.3omm1.mongodb.net/<dbname>?retryWrites=true&w=majority`;
+const mongoUri = `mongodb+srv://admin:${passDb}@cluster0.3omm1.mongodb.net/<dbname>?retryWrites=true&w=majority`;
 mongoose.connect(mongoUri, {
     useNewUrlParser: true,
     useCreateIndex: true
